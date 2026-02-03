@@ -11,76 +11,61 @@ public class File {
     private FileType type;
     private List<Character> content;
 
-	/*
-	 * Constructor
-	 */
+    /*
+     * Constructor
+     */
     public File() {
-
-        this.content = new ArrayList<Character>();
-        
+        this.content = new ArrayList<Character>(); // vacío pero no null
     }
 
-	/*
-	 * Method to test
-	 */
-    public void addProperty(char[] newcontent) throws InvalidContentException, WrongFileTypeException {
+    /*
+     * Method to test
+     */
+    public void addProperty(char[] newcontent)
+            throws InvalidContentException, WrongFileTypeException {
 
         if (newcontent == null) {
-        	
             throw new InvalidContentException();
-            
         }
 
         if (type == FileType.IMAGE) {
-        	
             throw new WrongFileTypeException();
-            
         }
 
         for (char c : newcontent) {
-        	
-            this.content.add(c);
-            
+            content.add(c);
         }
     }
 
-	/*
-	 * Method to test
-	 */
+    /*
+     * Method to test
+     */
     public long getCRC32() {
-    	
-        if (this.content.isEmpty()) {
-        	
+
+        if (content.isEmpty()) {
             return 0L;
-            
         }
 
+        // Conversión correcta según la especificación:
+        // usar SOLO el byte menos significativo [0–255]
         byte[] bytes = new byte[content.size()];
+
         for (int i = 0; i < content.size(); i++) {
-        	
-            char c = content.get(i);
-            bytes[i * 2] = (byte) ((c >>> 8) & 0xFF);
-            bytes[i * 2 + 1] = (byte) (c & 0xFF);
-            
+            bytes[i] = (byte) content.get(i).charValue();
         }
-        
-        return new FileUtils().calculateCRC32(bytes);
+
+        FileUtils utils = new FileUtils();
+        return utils.calculateCRC32(bytes);
     }
-    
-    
-	/*
-	 * Setters/getters
-	 */
+
+    /*
+     * Setters / getters
+     */
     public void setType(FileType type) {
-    	
-    	this.type = type;
-    	
+        this.type = type;
     }
-    
+
     public List<Character> getContent() {
-    	
-    	return content;
-    	
+        return content;
     }
-    
 }

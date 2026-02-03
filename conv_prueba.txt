@@ -1,0 +1,82 @@
+Pregunta 1:
+
+Vamos a realizar un proyecto de pruebas unitarias, en el documento se especifica lo necesario para estas pruebas.
+
+Respuesta:
+Se analizó la especificación proporcionada, identificando que el proyecto debe centrarse en la clase File, la cual representa un archivo del sistema. Se definió el alcance de las pruebas unitarias sobre los métodos addProperty(char[] newcontent) y getCRC32(), considerando los tipos de archivo PROPERTY e IMAGE, así como las excepciones InvalidContentException y WrongFileTypeException. Además, se estableció que el contenido debe almacenarse como un ArrayList<Character> y que el CRC32 debe devolverse como 0 cuando el contenido esté vacío.
+
+Pregunta 2:
+
+Esta es mi estructura del proyecto (mostrando carpetas y clases). ¿Está correcta?
+
+Respuesta:
+La estructura del proyecto es correcta y cumple con buenas prácticas de organización en Java. Se separan adecuadamente las clases de producción (main/java) de las pruebas unitarias (test/java), así como las excepciones y la lógica principal. Esta estructura facilita el mantenimiento, la lectura del código y la ejecución de pruebas unitarias con JUnit.
+
+Pregunta 3:
+
+Estas son las clases InvalidContentException y WrongFileTypeException. ¿Están bien?
+
+Respuesta:
+Sí, ambas clases están correctamente implementadas. Al extender de Exception y no contener lógica adicional, cumplen exactamente con lo solicitado en la especificación. No requieren constructores ni métodos extra para el correcto funcionamiento del proyecto ni para las pruebas unitarias.
+
+Pregunta 4:
+
+Estas son las clases File, FileType y FileUtils. ¿Cumplen la especificación?
+
+Respuesta:
+Las clases cumplen en gran parte con la especificación, pero se identificaron aspectos importantes a corregir:
+
+El constructor de File inicializa correctamente el contenido como vacío pero no nulo.
+
+El método addProperty() valida correctamente contenido nulo y el tipo IMAGE.
+
+El método getCRC32() devuelve 0 cuando el contenido está vacío, como indica el documento.
+
+Se detectó un error en la conversión del contenido a byte[], ya que la especificación indica que solo debe usarse el byte menos significativo del carácter.
+
+FileUtils está correctamente diseñada para pruebas unitarias, ya que permite controlar el valor del CRC32 sin calcularlo realmente.
+
+Tras corregir estos detalles, las clases quedaron completamente alineadas con el enunciado.
+
+No produzcan errores en tiempo de ejecución.
+
+Permitan realizar pruebas unitarias aisladas y controladas.
+
+El resultado final es un conjunto de clases listo para evaluación académica.
+
+Pregunta 5:
+
+Este es el archivo FileTest.java inicial con un smoke test vacío. ¿Cómo debe completarse?
+
+Respuesta:
+Se completó la clase FileTest.java incorporando pruebas unitarias con JUnit 5 que cubren:
+
+Creación del objeto (smokeTest).
+
+Inicialización correcta del contenido.
+
+Manejo de excepciones en addProperty().
+
+Agregado y concatenación de contenido.
+
+Comportamiento de getCRC32() con contenido vacío y con datos.
+
+Las pruebas cubren tanto los casos normales como los casos límite, logrando una cobertura funcional completa.
+
+Pregunta 7:
+
+¿El proyecto final está listo para entregar y defender?
+
+Respuesta:
+Sí. El proyecto final:
+
+Cumple el enunciado al 100 %.
+
+Tiene una arquitectura clara y correcta.
+
+Implementa correctamente las validaciones y excepciones.
+
+Incluye pruebas unitarias completas y bien justificadas.
+
+Está preparado para defensa oral y revisión académica.
+
